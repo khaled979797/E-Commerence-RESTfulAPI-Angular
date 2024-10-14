@@ -26,6 +26,20 @@ namespace E_Commerence.Api
             });
             builder.Services.AddModuleInfrastructureDependencies().AddModuleCoreDependencies();
 
+            #region AllowCors
+            var Cors = "_cors";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: Cors, policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
+                });
+            });
+            #endregion
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -58,12 +72,13 @@ namespace E_Commerence.Api
 
             app.UseHttpsRedirection();
 
+            app.UseCors(Cors);
+
             app.UseRouting();
 
             app.UseStaticFiles();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

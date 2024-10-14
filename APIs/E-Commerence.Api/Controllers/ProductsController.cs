@@ -27,7 +27,7 @@ namespace E_Commerence.Api.Controllers
         }
 
         [HttpGet(Router.ProductRouting.List)]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts(string sort,
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts(string? sort,
             int? brandId, int? typeId)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId);
