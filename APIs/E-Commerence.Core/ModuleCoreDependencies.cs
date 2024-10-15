@@ -1,7 +1,8 @@
-﻿using E_Commerence.Core.AppMetaData;
+﻿using E_Commerence.Core.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace E_Commerence.Core
 {
@@ -9,6 +10,8 @@ namespace E_Commerence.Core
     {
         public static IServiceCollection AddModuleCoreDependencies(this IServiceCollection services)
         {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = actionContext =>

@@ -1,7 +1,7 @@
 ﻿using E_Commerence.Core.Entities;
+using E_Commerence.Core.Specifications.Base;
 using E_Commerence.Infrastructure.Context;
 using E_Commerence.Infrastructure.Interfaces;
-using E_Commerence.Infrastructure.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerence.Infrastructure.Repositories
@@ -38,7 +38,11 @@ namespace E_Commerence.Infrastructure.Repositories
         public async Task<IReadOnlyList<T>> GetAllWithSpec(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync();
+        }
 
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
         }
     }
 }

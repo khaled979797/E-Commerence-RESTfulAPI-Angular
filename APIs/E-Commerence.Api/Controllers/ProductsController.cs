@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using E_Commerence.Core.AppMetaData;
 using E_Commerence.Core.Dtos;
 using E_Commerence.Core.Entities;
+using E_Commerence.Core.Helpers;
+using E_Commerence.Core.Specifications.ProductSpecifications;
 using E_Commerence.Infrastructure.Interfaces;
-using E_Commerence.Infrastructure.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerence.Api.Controllers
@@ -27,14 +27,18 @@ namespace E_Commerence.Api.Controllers
         }
 
         [HttpGet(Router.ProductRouting.List)]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts(string? sort,
-            int? brandId, int? typeId)
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId);
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+
+            var totalItems = await productRepository.CountAsync(countSpec);
             var products = await productRepository.GetAllWithSpec(spec);
 
-            var productsDto = mapper.Map<IReadOnlyList<ProductDto>>(products);
-            return Ok(productsDto);
+            var data = mapper.Map<IReadOnlyList<ProductDto>>(products);
+
+            return Ok(new Pagination<ProductDto>(productParams.PageIndex,
+                productParams.PageSize, totalItems, data));
         }
 
         [HttpGet(Router.ProductRouting.GetById)]

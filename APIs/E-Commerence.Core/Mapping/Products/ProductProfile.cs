@@ -2,7 +2,7 @@
 using E_Commerence.Core.Dtos;
 using E_Commerence.Core.Entities;
 
-namespace E_Commerence.Infrastructure.Mapping.Products
+namespace E_Commerence.Core.Mapping.Products
 {
     public class ProductProfile : Profile
     {

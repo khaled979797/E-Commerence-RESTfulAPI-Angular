@@ -1,5 +1,5 @@
 using E_Commerence.Core;
-using E_Commerence.Core.Middleware;
+using E_Commerence.Core.Helpers;
 using E_Commerence.Infrastructure;
 using E_Commerence.Infrastructure.Context;
 using E_Commerence.Infrastructure.SeedData;

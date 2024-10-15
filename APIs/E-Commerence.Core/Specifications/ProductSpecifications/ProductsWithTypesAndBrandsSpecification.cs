@@ -1,20 +1,26 @@
 ﻿using E_Commerence.Core.Entities;
+using E_Commerence.Core.Specifications.Base;
 
-namespace E_Commerence.Infrastructure.Specifications
+namespace E_Commerence.Core.Specifications.ProductSpecifications
 {
     public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
     {
-        public ProductsWithTypesAndBrandsSpecification(string? sort, int? brandId, int? typeId)
-            : base(x => (!brandId.HasValue || x.ProductBrandId == brandId) &&
-                (!typeId.HasValue || x.ProductTypeId == typeId))
+        public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
+            : base(x =>
+            (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
+            (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
+            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
+            )
         {
             AddIncludes(x => x.ProductType);
             AddIncludes(x => x.ProductBrand);
             AddOrderBy(x => x.Name);
+            ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1),
+                productParams.PageSize);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (!string.IsNullOrEmpty(productParams.Sort))
             {
-                switch (sort)
+                switch (productParams.Sort)
                 {
                     case "priceAsc":
                         AddOrderBy(p => p.Price);
@@ -27,7 +33,6 @@ namespace E_Commerence.Infrastructure.Specifications
                         break;
                 }
             }
-
         }
 
         public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
@@ -35,5 +40,6 @@ namespace E_Commerence.Infrastructure.Specifications
             AddIncludes(x => x.ProductType);
             AddIncludes(x => x.ProductBrand);
         }
+
     }
 }

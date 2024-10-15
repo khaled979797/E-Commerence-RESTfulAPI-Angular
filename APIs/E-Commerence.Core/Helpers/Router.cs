@@ -1,4 +1,4 @@
-﻿namespace E_Commerence.Core.AppMetaData
+﻿namespace E_Commerence.Core.Helpers
 {
     public static class Router
     {

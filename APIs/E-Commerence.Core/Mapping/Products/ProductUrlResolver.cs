@@ -3,7 +3,7 @@ using E_Commerence.Core.Dtos;
 using E_Commerence.Core.Entities;
 using Microsoft.Extensions.Configuration;
 
-namespace E_Commerence.Infrastructure.Mapping.Products
+namespace E_Commerence.Core.Mapping.Products
 {
     public class ProductUrlResolver : IValueResolver<Product, ProductDto, string>
     {
