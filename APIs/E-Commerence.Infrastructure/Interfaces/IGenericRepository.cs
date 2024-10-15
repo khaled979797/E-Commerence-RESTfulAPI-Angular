@@ -1,5 +1,5 @@
 ﻿using E_Commerence.Core.Entities;
-using E_Commerence.Infrastructure.Specifications;
+using E_Commerence.Core.Specifications.Base;
 
 namespace E_Commerence.Infrastructure.Interfaces
 {
@@ -9,5 +9,6 @@ namespace E_Commerence.Infrastructure.Interfaces
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<T> GetByIdWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> GetAllWithSpec(ISpecification<T> spec);
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }

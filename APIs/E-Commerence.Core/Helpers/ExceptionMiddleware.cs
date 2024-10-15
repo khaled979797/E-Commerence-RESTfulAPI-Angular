@@ -1,11 +1,10 @@
-﻿using E_Commerence.Core.AppMetaData;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Text.Json;
 
-namespace E_Commerence.Core.Middleware
+namespace E_Commerence.Core.Helpers
 {
     public class ExceptionMiddleware
     {

@@ -1,7 +1,7 @@
 ﻿using E_Commerence.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Commerence.Infrastructure.Specifications
+namespace E_Commerence.Core.Specifications.Base
 {
     public class SpecificationEvaluator<T> where T : BaseEntity
     {
