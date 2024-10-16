@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -8,8 +9,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   declarations: [],
   imports: [
     CommonModule,
-    NavBarComponent
+    NavBarComponent,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   exports: [NavBarComponent]
 })
-export class CoreModule { }
+
+export class CoreModule {
+
+}

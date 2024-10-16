@@ -6,13 +6,12 @@ import { IPagination } from '../shared/models/ipagination';
 import { IBrand } from '../shared/models/ibrand';
 import { IType } from '../shared/models/itype';
 import { ShopParams } from '../shared/models/shop-params';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl: string = 'https://localhost:44375/Api/V1/';
-
   constructor(private http: HttpClient) { }
 
   getProducts(shopParams:ShopParams): Observable<IPagination<IProduct[]>>{
@@ -24,7 +23,7 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber);
     params = params.append('pageSize', shopParams.pageSize);
 
-    return this.http.get<IPagination<IProduct[]>>(this.baseUrl + 'Product/List', {params}).pipe(
+    return this.http.get<IPagination<IProduct[]>>(environment.apiUrl + 'Product/List', {params}).pipe(
       map(response =>{
         return response
       })
@@ -32,14 +31,14 @@ export class ShopService {
   }
 
   getProduct(id:number): Observable<IProduct>{
-    return this.http.get<IProduct>(this.baseUrl + `Product/${id}`);
+    return this.http.get<IProduct>(environment.apiUrl + `Product/${id}`);
   }
 
   getBrands(): Observable<IBrand[]>{
-    return this.http.get<IBrand[]>(this.baseUrl + 'Product/Brands');
+    return this.http.get<IBrand[]>(environment.apiUrl + 'Product/Brands');
   }
 
   getTypes(): Observable<IType[]>{
-    return this.http.get<IType[]>(this.baseUrl + 'Product/Types');
+    return this.http.get<IType[]>(environment.apiUrl + 'Product/Types');
   }
 }
