@@ -15,5 +15,13 @@
             public const string Brands = Prefix + "/Brands";
             public const string Types = Prefix + "/Types";
         }
+        public static class BuggyRouting
+        {
+            public const string Prefix = Rule + "Buggy";
+            public const string TestAuth = Prefix + "/TestAuth";
+            public const string NotFound = Prefix + "/NotFound";
+            public const string ServerError = Prefix + "/ServerError";
+            public const string BadRequest = Prefix + "/BadRequest";
+        }
     }
 }
