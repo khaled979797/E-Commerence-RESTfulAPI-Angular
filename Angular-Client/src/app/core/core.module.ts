@@ -1,7 +1,8 @@
-import { NgModule, Provider } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ToastrModule } from 'ngx-toastr';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
+import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 
 
 
@@ -10,12 +11,11 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     CommonModule,
     NavBarComponent,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true
-    })
+    SectionHeaderComponent,
+    BreadcrumbComponent,
+    BreadcrumbItemDirective,
   ],
-  exports: [NavBarComponent]
+  exports: [NavBarComponent, SectionHeaderComponent]
 })
 
 export class CoreModule {

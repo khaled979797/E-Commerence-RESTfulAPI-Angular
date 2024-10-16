@@ -1,7 +1,7 @@
 import { AfterViewChecked, Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { IProduct } from '../shared/models/iproduct';
 import { ShopService } from './shop.service';
-import { ShopItemComponent } from "./shop-item/shop-item.component";
+import { ShopItemComponent } from "./components/shop-item/shop-item.component";
 import { IBrand } from '../shared/models/ibrand';
 import { IType } from '../shared/models/itype';
 import { ShopParams } from '../shared/models/shop-params';
