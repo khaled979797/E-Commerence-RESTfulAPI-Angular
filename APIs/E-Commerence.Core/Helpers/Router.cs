@@ -23,5 +23,9 @@
             public const string ServerError = Prefix + "/ServerError";
             public const string BadRequest = Prefix + "/BadRequest";
         }
+        public static class BasketRouting
+        {
+            public const string Prefix = Rule + "Basket";
+        }
     }
 }

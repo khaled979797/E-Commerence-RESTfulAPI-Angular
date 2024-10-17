@@ -24,7 +24,7 @@ namespace E_Commerence.Api
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbContext"));
             });
-            builder.Services.AddModuleInfrastructureDependencies().AddModuleCoreDependencies();
+            builder.Services.AddModuleInfrastructureDependencies(builder.Configuration).AddModuleCoreDependencies();
 
             #region AllowCors
             var Cors = "_cors";
