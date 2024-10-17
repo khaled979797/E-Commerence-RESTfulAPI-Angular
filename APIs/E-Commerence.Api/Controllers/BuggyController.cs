@@ -1,7 +1,6 @@
 ﻿using E_Commerence.Core.Helpers;
 using E_Commerence.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
-using static E_Commerence.Core.Helpers.Router;
 
 namespace E_Commerence.Api.Controllers
 {
@@ -14,14 +13,14 @@ namespace E_Commerence.Api.Controllers
             this.context = context;
         }
 
-        [HttpGet(BuggyRouting.TestAuth)]
+        [HttpGet(Router.BuggyRouting.TestAuth)]
         //[Authorize]
         public ActionResult<string> GetSecretText()
         {
             return "secret stuff";
         }
 
-        [HttpGet(BuggyRouting.NotFound)]
+        [HttpGet(Router.BuggyRouting.NotFound)]
         public ActionResult GetNotFoundRequest()
         {
             var thing = context.Products.Find(42);
@@ -31,7 +30,7 @@ namespace E_Commerence.Api.Controllers
             return Ok();
         }
 
-        [HttpGet(BuggyRouting.ServerError)]
+        [HttpGet(Router.BuggyRouting.ServerError)]
         public ActionResult GetServerError()
         {
             var thing = context.Products.Find(42);
@@ -41,7 +40,7 @@ namespace E_Commerence.Api.Controllers
             return Ok();
         }
 
-        [HttpGet(BuggyRouting.BadRequest)]
+        [HttpGet(Router.BuggyRouting.BadRequest)]
         public ActionResult GetBadRequest()
         {
             return BadRequest(new ApiResponse(400));
