@@ -1,5 +1,6 @@
 ﻿using E_Commerence.Core.Helpers;
 using E_Commerence.Infrastructure.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerence.Api.Controllers
@@ -14,7 +15,7 @@ namespace E_Commerence.Api.Controllers
         }
 
         [HttpGet(Router.BuggyRouting.TestAuth)]
-        //[Authorize]
+        [Authorize]
         public ActionResult<string> GetSecretText()
         {
             return "secret stuff";

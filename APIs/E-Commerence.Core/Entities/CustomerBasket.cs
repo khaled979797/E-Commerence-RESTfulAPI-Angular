@@ -12,6 +12,6 @@
             Items = new HashSet<BasketItem>();
         }
         public string Id { get; set; }
-        public ICollection<BasketItem> Items { get; set; }
+        public virtual ICollection<BasketItem> Items { get; set; }
     }
 }
