@@ -27,5 +27,16 @@
         {
             public const string Prefix = Rule + "Basket";
         }
+
+        public static class UserRouting
+        {
+            public const string Prefix = Rule + "User";
+            public const string User = Prefix + "/User";
+            public const string Login = Prefix + "/Login";
+            public const string Register = Prefix + "/Register";
+            public const string EmailExists = Prefix + "/EmailExists";
+            public const string Address = Prefix + "/Address";
+            public const string EditAddress = Prefix + "/EditAddress";
+        }
     }
 }

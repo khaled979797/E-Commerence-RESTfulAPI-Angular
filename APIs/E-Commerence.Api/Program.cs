@@ -1,8 +1,10 @@
 using E_Commerence.Core;
+using E_Commerence.Core.Entities.Identity;
 using E_Commerence.Core.Helpers;
 using E_Commerence.Infrastructure;
 using E_Commerence.Infrastructure.Context;
 using E_Commerence.Infrastructure.SeedData;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerence.Api
@@ -56,8 +58,10 @@ namespace E_Commerence.Api
                 try
                 {
                     var context = services.GetRequiredService<AppDbContext>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
                     await context.Database.MigrateAsync();
                     await StoreContextSeed.SeedAsync(context, loggerFactory);
+                    await IdentityContextSeed.SeedUserAsync(userManager);
                 }
                 catch (Exception ex)
                 {
@@ -77,6 +81,8 @@ namespace E_Commerence.Api
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
