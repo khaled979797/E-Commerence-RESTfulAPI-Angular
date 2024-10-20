@@ -31,7 +31,7 @@
         public static class UserRouting
         {
             public const string Prefix = Rule + "User";
-            public const string User = Prefix + "/User";
+            public const string User = Prefix;
             public const string Login = Prefix + "/Login";
             public const string Register = Prefix + "/Register";
             public const string EmailExists = Prefix + "/EmailExists";

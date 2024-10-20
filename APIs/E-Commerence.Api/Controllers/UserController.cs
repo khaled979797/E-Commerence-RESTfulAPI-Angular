@@ -31,7 +31,7 @@ namespace E_Commerence.Api.Controllers
         [HttpGet(UserRouting.User)]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await userManager.FindUserByClaimsPrincipalAsync(HttpContext.User);
+            var user = await userManager.FindUserByClaimsPrincipalAsync(User);
             return new UserDto
             {
                 Email = user.Email,
@@ -50,7 +50,7 @@ namespace E_Commerence.Api.Controllers
         [HttpGet(UserRouting.Address)]
         public async Task<ActionResult<AddressDto>> GetAddress()
         {
-            var user = await userManager.FindUserByClaimsPrincipalWithAddressAsync(HttpContext.User);
+            var user = await userManager.FindUserByClaimsPrincipalWithAddressAsync(User);
             return mapper.Map<AddressDto>(user.Address);
         }
 
@@ -58,7 +58,7 @@ namespace E_Commerence.Api.Controllers
         [HttpPut(UserRouting.EditAddress)]
         public async Task<ActionResult<AddressDto>> EditAddress(AddressDto addressDto)
         {
-            var user = await userManager.FindUserByClaimsPrincipalWithAddressAsync(HttpContext.User);
+            var user = await userManager.FindUserByClaimsPrincipalWithAddressAsync(User);
             user.Address = mapper.Map<Address>(addressDto);
             var result = await userManager.UpdateAsync(user);
 
