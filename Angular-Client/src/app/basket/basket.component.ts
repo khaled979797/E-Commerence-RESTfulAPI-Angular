@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { BasketService } from './basket.service';
-import { Observable } from 'rxjs';
-import { IBasket, IBasketItem } from '../shared/models/ibasket';
 import { CommonModule } from '@angular/common';
 import { BasketSummaryComponent } from "../shared/components/basket-summary/basket-summary.component";
 import { OrderTotalsComponent } from "../shared/components/order-totals/order-totals.component";
 import { RouterLink } from '@angular/router';
+import { IBasketItem } from '../shared/models/ibasket-item';
 
 @Component({
   selector: 'app-basket',

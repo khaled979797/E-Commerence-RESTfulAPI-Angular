@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, map, Observable } from 'rxjs';
-import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/ibasket';
+import { Basket, IBasket } from '../shared/models/ibasket';
 import { environment } from '../../environments/environment';
 import { IProduct } from '../shared/models/iproduct';
+import { IBasketTotal } from '../shared/models/ibasket-total';
+import { IBasketItem } from '../shared/models/ibasket-item';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { IProduct } from '../shared/models/iproduct';
 export class BasketService {
   basketSource = new BehaviorSubject<IBasket | null>(null);
   basket$ = this.basketSource.asObservable();
-  basketTotalSource = new BehaviorSubject<IBasketTotals | null>(null);
+  basketTotalSource = new BehaviorSubject<IBasketTotal | null>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
   constructor(private http:HttpClient) { }
