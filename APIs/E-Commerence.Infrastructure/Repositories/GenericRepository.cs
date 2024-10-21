@@ -20,6 +20,21 @@ namespace E_Commerence.Infrastructure.Repositories
             return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
         }
 
+        public void Add(T entity)
+        {
+            context.Set<T>().Add(entity);
+        }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+
+        public void Delete(T entity)
+        {
+            context.Set<T>().Remove(entity);
+        }
+
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await context.Set<T>().ToListAsync();
@@ -40,9 +55,10 @@ namespace E_Commerence.Infrastructure.Repositories
             return await ApplySpecification(spec).ToListAsync();
         }
 
-        public async Task<int> CountAsync(ISpecification<T> spec)
+        public void Update(T entity)
         {
-            return await ApplySpecification(spec).CountAsync();
+            context.Set<T>().Attach(entity);
+            context.Entry(entity).State = EntityState.Modified;
         }
     }
 }

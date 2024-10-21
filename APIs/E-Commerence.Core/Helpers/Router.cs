@@ -38,5 +38,14 @@
             public const string Address = Prefix + "/Address";
             public const string EditAddress = Prefix + "/EditAddress";
         }
+
+        public static class OrderRouting
+        {
+            public const string Prefix = Rule + "Order";
+            public const string GetOrders = Prefix;
+            public const string CreateOrder = Prefix + "/CreateOrder";
+            public const string GetOrderById = Prefix + SingleRoute;
+            public const string GetDeliveryMethods = Prefix + "/GetDeliveryMethods";
+        }
     }
 }

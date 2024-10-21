@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using E_Commerence.Core.Dtos;
-using E_Commerence.Core.Entities.Identity;
+using E_Commerence.Core.Entities.OrderAggregate;
 
 namespace E_Commerence.Core.Mapping.User
 {
@@ -8,7 +8,8 @@ namespace E_Commerence.Core.Mapping.User
     {
         public UserMapping()
         {
-            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<Entities.Identity.Address, AddressDto>().ReverseMap();
+            CreateMap<AddressDto, Address>();
         }
     }
 }
