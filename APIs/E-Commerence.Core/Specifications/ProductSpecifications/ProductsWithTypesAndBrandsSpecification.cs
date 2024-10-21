@@ -12,8 +12,8 @@ namespace E_Commerence.Core.Specifications.ProductSpecifications
             (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
             )
         {
-            AddIncludes(x => x.ProductType);
-            AddIncludes(x => x.ProductBrand);
+            AddInclude(x => x.ProductType);
+            AddInclude(x => x.ProductBrand);
             AddOrderBy(x => x.Name);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1),
                 productParams.PageSize);
@@ -37,8 +37,8 @@ namespace E_Commerence.Core.Specifications.ProductSpecifications
 
         public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
         {
-            AddIncludes(x => x.ProductType);
-            AddIncludes(x => x.ProductBrand);
+            AddInclude(x => x.ProductType);
+            AddInclude(x => x.ProductBrand);
         }
 
     }

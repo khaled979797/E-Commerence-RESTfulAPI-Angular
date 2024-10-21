@@ -1,4 +1,5 @@
 ﻿using E_Commerence.Core.Entities;
+using E_Commerence.Core.Entities.OrderAggregate;
 using E_Commerence.Infrastructure.Context;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
@@ -43,6 +44,17 @@ namespace E_Commerence.Infrastructure.SeedData
                     foreach (var item in products)
                     {
                         context.Products.Add(item);
+                    }
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.DeliveryMethods.Any())
+                {
+                    var deliveryMethodsData = File.ReadAllText(@"D:\Programming\E-Commerence-RESTfulAPI-Angular\E-Commerence.Infrastructure\SeedData\delivery.json");
+                    var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+                    foreach (var item in deliveryMethods)
+                    {
+                        context.DeliveryMethods.Add(item);
                     }
                     await context.SaveChangesAsync();
                 }
