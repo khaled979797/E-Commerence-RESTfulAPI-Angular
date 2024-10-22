@@ -7,12 +7,14 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BasketService } from './basket/basket.service';
 import { AccountService } from './account/account.service';
 import { AccountModule } from './account/account.module';
+import { CheckoutModule } from './checkout/checkout.module';
+import {CdkStepperModule} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, CoreModule, SharedModule, SectionHeaderComponent,
-    NgxSpinnerModule, AccountModule
+    NgxSpinnerModule, AccountModule, CheckoutModule,CdkStepperModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

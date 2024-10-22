@@ -59,7 +59,7 @@ namespace E_Commerence.Infrastructure.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.Identity.AppUser", b =>
@@ -156,7 +156,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryMethods");
+                    b.ToTable("DeliveryMethods", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.OrderAggregate.Order", b =>
@@ -192,7 +192,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasIndex("DeliveryMethodId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.OrderAggregate.OrderItem", b =>
@@ -216,7 +216,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.Product", b =>
@@ -254,7 +254,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasIndex("ProductTypeId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.ProductBrand", b =>
@@ -271,7 +271,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductBrands");
+                    b.ToTable("ProductBrands", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerence.Core.Entities.ProductType", b =>
@@ -288,7 +288,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("ProductTypes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -443,7 +443,7 @@ namespace E_Commerence.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("E_Commerence.Core.Entities.OrderAggregate.Address", "ShipToAddress", b1 =>
+                    b.OwnsOne("E_Commerence.Core.Entities.OrderAggregate.Order.ShipToAddress#E_Commerence.Core.Entities.OrderAggregate.Address", "ShipToAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
@@ -474,7 +474,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                             b1.HasKey("OrderId");
 
-                            b1.ToTable("Orders");
+                            b1.ToTable("Orders", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
@@ -493,7 +493,7 @@ namespace E_Commerence.Infrastructure.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.OwnsOne("E_Commerence.Core.Entities.OrderAggregate.ProductItemOrdered", "ItemOrdered", b1 =>
+                    b.OwnsOne("E_Commerence.Core.Entities.OrderAggregate.OrderItem.ItemOrdered#E_Commerence.Core.Entities.OrderAggregate.ProductItemOrdered", "ItemOrdered", b1 =>
                         {
                             b1.Property<int>("OrderItemId")
                                 .HasColumnType("int");
@@ -511,7 +511,7 @@ namespace E_Commerence.Infrastructure.Migrations
 
                             b1.HasKey("OrderItemId");
 
-                            b1.ToTable("OrderItems");
+                            b1.ToTable("OrderItems", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderItemId");

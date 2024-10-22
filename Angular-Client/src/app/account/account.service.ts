@@ -4,6 +4,8 @@ import { BehaviorSubject, map, of, ReplaySubject } from 'rxjs';
 import { IUser } from '../shared/models/iuser';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { IAddress } from '../shared/models/iaddress';
+import { app } from '../../../server';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +60,13 @@ export class AccountService {
         }
       })
     );
+  }
+
+  getUserAddress(){
+    return this.http.get<IAddress>(environment.apiUrl + 'User/Address');
+  }
+
+  updateUserAddress(address:IAddress){
+    return this.http.post<IAddress>(environment.apiUrl + 'User/EditAddress', address);
   }
 }
