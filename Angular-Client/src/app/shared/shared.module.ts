@@ -6,6 +6,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {CdkStepperModule} from '@angular/cdk/stepper';
 
 
 
@@ -20,7 +21,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     PaginationModule,
     CarouselModule.forRoot(),
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    CdkStepperModule,
   ],
   exports:
   [
@@ -28,7 +30,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     PagerComponent,
     CarouselModule,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    CdkStepperModule
   ]
 })
 export class SharedModule { }

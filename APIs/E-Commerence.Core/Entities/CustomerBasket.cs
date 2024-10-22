@@ -4,14 +4,18 @@
     {
         public CustomerBasket()
         {
-            Items = new HashSet<BasketItem>();
         }
+
         public CustomerBasket(string id)
         {
             Id = id;
-            Items = new HashSet<BasketItem>();
         }
+
         public string Id { get; set; }
-        public virtual ICollection<BasketItem> Items { get; set; }
+        public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+        public int? DeliveryMethodId { get; set; }
+        public string? ClientSecret { get; set; }
+        public string? PaymentIntentId { get; set; }
+        public decimal ShippingPrice { get; set; }
     }
 }
