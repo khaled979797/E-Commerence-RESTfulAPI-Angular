@@ -6,7 +6,5 @@
   <div *ngIf="control.errors?.['required']" class="invalid-feedback">Please enter your {{label}}</div>
   <div *ngIf="control.errors?.['email']" class="invalid-feedback">Invalid email address</div>
   <div *ngIf="control.errors?.['pattern']" class="invalid-feedback">{{label}} not complex enough</div>
-  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback d-block">
-    Email address is taken
-  </div>
+  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback d-block">Email address is taken</div>
 </div>

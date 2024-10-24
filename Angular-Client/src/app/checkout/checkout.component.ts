@@ -20,7 +20,7 @@ import { BasketService } from '../basket/basket.service';
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup = new FormGroup({});
-  constructor(private fb: FormBuilder, private accountService:AccountService) { }
+  constructor(private fb: FormBuilder, private accountService:AccountService, private basketService:BasketService) { }
 
   completed = false;
 
@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.createCheckoutForm();
     this.getAddressFromValues();
+    this.getDeliveryMethodValue();
   }
 
   createCheckoutForm() {
@@ -56,5 +57,12 @@ export class CheckoutComponent implements OnInit {
     this.accountService.getUserAddress().subscribe(address =>{
       this.checkoutForm.get('addressForm')?.patchValue(address)
     });
+  }
+
+  getDeliveryMethodValue(){
+    const basket = this.basketService.getCurrentBasketValue();
+    if(basket?.deliveryMethodId !== null){
+      this.checkoutForm.get('deliveryForm')?.get('deliveryMethod')?.patchValue(basket?.deliveryMethodId?.toString());
+    }
   }
 }
