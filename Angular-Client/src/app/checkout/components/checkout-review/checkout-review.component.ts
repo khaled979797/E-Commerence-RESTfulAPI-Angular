@@ -17,11 +17,11 @@ export class CheckoutReviewComponent {
   constructor(private basketService: BasketService, private toastr: ToastrService) {}
 
   createPaymentIntent() {
-    // this.basketService.createPaymentIntent().subscribe({
-    //   next: () => {
-    //     this.appStepper?.next();
-    //   },
-    //   error: error => this.toastr.error(error.message)
-    // });
+    this.basketService.createPaymentIntent().subscribe({
+      next: () => {
+        this.appStepper?.next();
+      },
+      error: error => this.toastr.error(error.message)
+    });
   }
 }

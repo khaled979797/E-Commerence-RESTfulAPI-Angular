@@ -9,16 +9,21 @@ namespace E_Commerence.Infrastructure.Repositories
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IBasketRepository basketRepository;
+        private readonly IPaymentRepository paymentRepository;
 
-        public OrderRepository(IUnitOfWork unitOfWork, IBasketRepository basketRepository)
+        public OrderRepository(IUnitOfWork unitOfWork, IBasketRepository basketRepository, IPaymentRepository paymentRepository)
         {
             this.unitOfWork = unitOfWork;
             this.basketRepository = basketRepository;
+            this.paymentRepository = paymentRepository;
         }
 
         public async Task<Order> CreateOrderAsync(string buyerEmail, int delieveryMethodId, string basketId, Address shippingAddress)
         {
+            // get basket from repo
             var basket = await basketRepository.GetBasketAsync(basketId);
+
+            // get items from the product repo
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
@@ -28,15 +33,37 @@ namespace E_Commerence.Infrastructure.Repositories
                 items.Add(orderItem);
             }
 
-            var delieveryMethod = await unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(delieveryMethodId);
-            var subtotal = items.Sum(item => item.Price * item.Quantity);
-            var order = new Order(items, buyerEmail, shippingAddress, delieveryMethod, subtotal, "1");
+            // get delivery method from repo
+            var deliveryMethod = await unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(delieveryMethodId);
 
-            unitOfWork.Repository<Order>().Add(order);
+            // calc subtotal
+            var subtotal = items.Sum(item => item.Price * item.Quantity);
+
+            // check to see if order exists
+            var spec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
+            var order = await unitOfWork.Repository<Order>().GetByIdWithSpec(spec);
+
+            if (order != null)
+            {
+                order.ShipToAddress = shippingAddress;
+                order.DeliveryMethod = deliveryMethod;
+                order.Subtotal = subtotal;
+                unitOfWork.Repository<Order>().Update(order);
+            }
+            else
+            {
+                // create order
+                order = new Order(items, buyerEmail, shippingAddress, deliveryMethod,
+                    subtotal, basket.PaymentIntentId);
+                unitOfWork.Repository<Order>().Add(order);
+            }
+
+            // save to db
             var result = await unitOfWork.Complete();
 
             if (result <= 0) return null;
-            await basketRepository.DeleteBasketAsync(basketId);
+
+            // return order
             return order;
         }
 

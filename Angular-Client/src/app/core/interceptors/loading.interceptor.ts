@@ -5,8 +5,18 @@ import { delay, finalize } from 'rxjs';
 
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const busyService = inject(BusyService);
-  if(!req.url.includes('EmailExists')){
-    busyService.busy();
+  if(req.method === 'POST' && req.url.includes('CreateOrder')){
+    return next(req);
   }
-  return next(req).pipe(delay(1000), finalize(() => busyService.idle()));
+
+  if(req.method === 'DELETE'){
+    return next(req);
+  }
+
+  if(req.url.includes('EmailExists')){
+    return next(req);
+  }
+
+  busyService.busy();
+  return next(req).pipe(finalize(() => busyService.idle()));
 };

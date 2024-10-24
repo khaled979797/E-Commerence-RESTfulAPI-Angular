@@ -47,5 +47,12 @@
             public const string GetOrderById = Prefix + SingleRoute;
             public const string GetDeliveryMethods = Prefix + "/GetDeliveryMethods";
         }
+
+        public static class PaymentRouting
+        {
+            public const string Prefix = Rule + "Payment";
+            public const string CreateOrUpdate = Prefix + "/{basketId}";
+            public const string Webhook = Prefix + "/Webhook";
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace E_Commerence.Infrastructure
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddSingleton<IResponseCacheRepository, ResponseCacheRepository>();
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
