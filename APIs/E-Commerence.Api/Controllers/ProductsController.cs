@@ -3,7 +3,6 @@ using E_Commerence.Core.Dtos;
 using E_Commerence.Core.Entities;
 using E_Commerence.Core.Helpers;
 using E_Commerence.Core.Specifications.ProductSpecifications;
-using E_Commerence.Infrastructure.Attributes;
 using E_Commerence.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +25,7 @@ namespace E_Commerence.Api.Controllers
             this.productBrandRepository = productBrandRepository;
             this.mapper = mapper;
         }
-        [Cached(600)]
+        //[Cached(600)]
         [HttpGet(Router.ProductRouting.List)]
         public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
@@ -42,7 +41,7 @@ namespace E_Commerence.Api.Controllers
                 productParams.PageSize, totalItems, data));
         }
 
-        [Cached(600)]
+        //[Cached(600)]
         [HttpGet(Router.ProductRouting.GetById)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
@@ -54,14 +53,14 @@ namespace E_Commerence.Api.Controllers
             return Ok(productDto);
         }
 
-        [Cached(600)]
+        //[Cached(600)]
         [HttpGet(Router.ProductRouting.Brands)]
         public async Task<ActionResult<List<ProductBrand>>> GetProductBrands()
         {
             return Ok(await productBrandRepository.GetAllAsync());
         }
 
-        [Cached(600)]
+        //[Cached(600)]
         [HttpGet(Router.ProductRouting.Types)]
         public async Task<ActionResult<List<ProductType>>> GetProductTypes()
         {

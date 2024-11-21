@@ -2,7 +2,6 @@
 using E_Commerence.Core.Entities.OrderAggregate;
 using E_Commerence.Infrastructure.Context;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 using System.Text.Json;
 
 namespace E_Commerence.Infrastructure.SeedData
@@ -11,13 +10,13 @@ namespace E_Commerence.Infrastructure.SeedData
     {
         public static async Task SeedAsync(AppDbContext context, ILoggerFactory loggerFactory)
         {
-            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var path = Directory.GetCurrentDirectory();
 
             try
             {
                 if (!context.ProductBrands.Any())
                 {
-                    var brandsData = File.ReadAllText(@"D:\Programming\E-Commerence-RESTfulAPI-Angular\E-Commerence.Infrastructure\SeedData\brands.json");
+                    var brandsData = File.ReadAllText(@"D:\Programming\Projects\E-Commerence-RESTfulAPI-Angular\APIs\E-Commerence.Infrastructure\SeedData\brands.json");
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
                     foreach (var item in brands)
                     {
@@ -28,7 +27,7 @@ namespace E_Commerence.Infrastructure.SeedData
 
                 if (!context.ProductTypes.Any())
                 {
-                    var typesData = File.ReadAllText(@"D:\Programming\E-Commerence-RESTfulAPI-Angular\E-Commerence.Infrastructure\SeedData\types.json");
+                    var typesData = File.ReadAllText(@"D:\Programming\Projects\E-Commerence-RESTfulAPI-Angular\APIs\E-Commerence.Infrastructure\SeedData\types.json");
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
                     foreach (var item in types)
                     {
@@ -39,7 +38,7 @@ namespace E_Commerence.Infrastructure.SeedData
 
                 if (!context.Products.Any())
                 {
-                    var productsData = File.ReadAllText(@"D:\Programming\E-Commerence-RESTfulAPI-Angular\E-Commerence.Infrastructure\SeedData\products.json");
+                    var productsData = File.ReadAllText(@"D:\Programming\Projects\E-Commerence-RESTfulAPI-Angular\APIs\E-Commerence.Infrastructure\SeedData\products.json");
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
                     foreach (var item in products)
                     {
@@ -50,7 +49,7 @@ namespace E_Commerence.Infrastructure.SeedData
 
                 if (!context.DeliveryMethods.Any())
                 {
-                    var deliveryMethodsData = File.ReadAllText(@"D:\Programming\E-Commerence-RESTfulAPI-Angular\E-Commerence.Infrastructure\SeedData\delivery.json");
+                    var deliveryMethodsData = File.ReadAllText(@"D:\Programming\Projects\E-Commerence-RESTfulAPI-Angular\APIs\E-Commerence.Infrastructure\SeedData\delivery.json");
                     var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
                     foreach (var item in deliveryMethods)
                     {

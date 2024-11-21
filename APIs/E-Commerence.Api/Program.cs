@@ -6,6 +6,7 @@ using E_Commerence.Infrastructure.Context;
 using E_Commerence.Infrastructure.SeedData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 namespace E_Commerence.Api
 {
@@ -82,11 +83,19 @@ namespace E_Commerence.Api
 
             app.UseStaticFiles();
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+                RequestPath = "/content"
+            });
+
             app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapFallbackToController("Index", "Fallback");
 
             app.Run();
         }
